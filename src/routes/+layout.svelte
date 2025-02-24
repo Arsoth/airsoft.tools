@@ -118,7 +118,7 @@
 					</a>
 					<a
 						class="py-0.5 block parent"
-						href="https://github.com/The-Foundation-Group/airsoft.tools/issues"
+						href="https://github.com/Arsoth/airsoft.tools/issues"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
