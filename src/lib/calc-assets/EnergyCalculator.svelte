@@ -177,5 +177,5 @@
 </div>
 
 <style lang="postcss">
-	@import './calc.mcss';
+	@import './calc.css';
 </style>

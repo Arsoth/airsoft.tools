@@ -33,7 +33,7 @@
 }
 
 .calcButton {
-	@apply btn btn-warning w-full mt-4 text-lg font-bold;
+	@apply btn !btn-warning w-full mt-4 text-lg font-bold;
 }
 
 .calcOutput {

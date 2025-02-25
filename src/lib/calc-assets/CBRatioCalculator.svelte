@@ -544,7 +544,14 @@
 </div>
 
 <style lang="postcss">
-	@import './calc.mcss';
+	@import './calc.css';
+	.calcButton {
+		@apply btn !btn-warning w-full mt-4 text-lg font-bold;
+	}
+
+	.validButton {
+		@apply !btn-secondary;
+	}
 	.floatsAfter {
 		visibility: hidden;
 		position: absolute;

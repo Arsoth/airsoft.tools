@@ -127,7 +127,7 @@
 </div>
 
 <style lang="postcss">
-	@import './calc.mcss';
+	@import './calc.css';
 	.floatsAfter {
 		visibility: hidden;
 		position: absolute;

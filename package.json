@@ -37,16 +37,10 @@
 		"tailwindcss": "^3.4.1",
 		"tslib": "^2.8.1",
 		"typescript": "^5.7.3",
-		"vite": "^6.2.0",
-		"vite-plugin-svelte-purgecss": "^0.2.7"
+		"vite": "^6.2.0"
 	},
 	"type": "module",
 	"dependencies": {
 		"theme-change": "^2.5.0"
-	},
-	"overrides": {
-		"vite-plugin-svelte-purgecss": {
-			"vite": "^6.2.0"
-		}
 	}
 }
