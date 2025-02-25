@@ -143,6 +143,7 @@
 		}
 		return result;
 	}
+	// @ts-ignore
 	$: cylData = selectedCylType === 'AEG' ? aegCyls[cylValue.value] : boltCyls[cylValue.value];
 	$: aoeFixed === true ? (toothToCylDistance.value = 10.5) : (toothToCylDistance.value = 6);
 	$: bbWeight.value = decimalizeString(bbWeight.value);
@@ -542,7 +543,7 @@
 	</div>
 </div>
 
-<style type="text/m-css">
+<style lang="postcss">
 	@import './calc.mcss';
 	.floatsAfter {
 		visibility: hidden;

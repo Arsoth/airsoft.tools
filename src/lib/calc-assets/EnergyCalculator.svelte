@@ -35,7 +35,7 @@
 	let primaryOutput = '';
 	let comparisonOutput = '';
 	let infoOpen = false;
-	function calculateEnergy(event: { preventDefault: () => void; }) {
+	function calculateEnergy(event: { preventDefault: () => void }) {
 		event.preventDefault();
 		primaryOutput = '';
 		comparisonOutput = '';
@@ -176,6 +176,6 @@
 	</div>
 </div>
 
-<style type="text/m-css">
+<style lang="postcss">
 	@import './calc.mcss';
 </style>

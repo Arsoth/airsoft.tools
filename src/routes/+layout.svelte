@@ -134,7 +134,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="postcss">
 	.menuItem {
 		@apply px-4 py-2 label text-sm font-semibold rounded-lg transition-all;
 	}

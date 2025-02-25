@@ -13,15 +13,15 @@
 		<span
 			class="line top"
 			style="transition: {transition}; {menuOpen ? 'transform: rotate(45deg)' : ''}"
-		/>
+		></span>
 		<span
 			class="line mid"
 			style="transition: {transition}; {menuOpen ? 'transform: rotate(45deg)' : ''}"
-		/>
+		></span>
 		<span
 			class="line bottom"
 			style="transition: {transition}; {menuOpen ? 'transform: rotate(-45deg)' : ''}"
-		/>
+		></span>
 	</div>
 </div>
 

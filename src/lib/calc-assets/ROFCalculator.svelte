@@ -1,9 +1,5 @@
 <script lang="ts">
-	import {
-		decimalizeString,
-		roundTo,
-		validateNumber
-	} from '$lib/util-lib';
+	import { decimalizeString, roundTo, validateNumber } from '$lib/util-lib';
 	import type { SpecsObject } from '$lib/types';
 	import { gearShotsPerCycle } from '$lib/values';
 	import { slide } from 'svelte/transition';
@@ -34,8 +30,8 @@
 		}
 	}
 	function buildOutput(ratio: number, gearType: number, motorSpeed: number) {
-		let rofLow = roundTo((((motorSpeed*1000) * 0.8 /60) / ratio) * gearType, 0)
-		let rofHigh = roundTo((((motorSpeed*1000) * 0.9 /60) / ratio) * gearType, 0)
+		let rofLow = roundTo(((motorSpeed * 1000 * 0.8) / 60 / ratio) * gearType, 0);
+		let rofHigh = roundTo(((motorSpeed * 1000 * 0.9) / 60 / ratio) * gearType, 0);
 		output = `${rofLow} - ${rofHigh} RPS`;
 	}
 
@@ -47,8 +43,8 @@
 	{#if infoOpen}
 		<div class="calcInfoBox" transition:slide={{ delay: 10, duration: 150 }}>
 			<p class="font-bold">
-				Data is approximate and is based 80-90% efficience of the motor to help stay inside any
-				ROF limits.
+				Data is approximate and is based 80-90% efficience of the motor to help stay inside any ROF
+				limits.
 			</p>
 		</div>
 	{/if}
@@ -130,7 +126,7 @@
 	</div>
 </div>
 
-<style type="text/m-css">
+<style lang="postcss">
 	@import './calc.mcss';
 	.floatsAfter {
 		visibility: hidden;

@@ -25,7 +25,7 @@
 	let conversion = '';
 	let infoOpen = false;
 
-	function calculateEnergy(event: { preventDefault: () => void; }) {
+	function calculateEnergy(event: { preventDefault: () => void }) {
 		event.preventDefault();
 		conversion = '';
 		let tempSpring: number;
@@ -113,6 +113,6 @@
 	</div>
 </div>
 
-<style type="text/m-css">
+<style lang="postcss">
 	@import './calc.mcss';
 </style>

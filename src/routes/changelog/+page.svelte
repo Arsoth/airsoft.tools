@@ -7,17 +7,17 @@
 </svelte:head>
 
 <main>
-		{#each Object.entries(ChangeLog) as [date, content]}
-			<div class="cardWrapper">
-				<span class="cardTop">{date} - {content.title}</span>
-				<div class="cardBody">
-					{#each content.body as paragraph}<p>{paragraph}</p>{/each}</div></div>
-		{/each}
-
-
+	{#each Object.entries(ChangeLog) as [date, content]}
+		<div class="cardWrapper">
+			<span class="cardTop">{date} - {content.title}</span>
+			<div class="cardBody">
+				{#each content.body as paragraph}<p>{paragraph}</p>{/each}
+			</div>
+		</div>
+	{/each}
 </main>
 
-<style>
+<style lang="postcss">
 	.cardTop {
 		border-radius: 0.5rem 0.5rem 0 0;
 		min-height: 2.5rem;

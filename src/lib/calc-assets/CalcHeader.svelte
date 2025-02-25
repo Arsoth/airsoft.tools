@@ -26,7 +26,7 @@
 	>
 </button>
 
-<style>
+<style lang="postcss">
 	.calc-top {
 		border-radius: 0.5rem 0.5rem 0 0;
 		height: 2.5rem;

@@ -2,16 +2,13 @@
 	export let open = false;
 	export let title;
 
-	function toggle(event: { preventDefault: () => void }){
+	function toggle(event: { preventDefault: () => void }) {
 		event.preventDefault();
-		open = !open
+		open = !open;
 	}
 </script>
 
-<button
-	on:click={(event) => toggle(event)}
-	class="calc-top"
->
+<button on:click={(event) => toggle(event)} class="calc-top">
 	<span>{title}</span>
 	<svg
 		fill="currentColor"
@@ -27,10 +24,10 @@
 	>
 </button>
 
-<style>
+<style lang="postcss">
 	.calc-top {
 		border-radius: 0.5rem;
 		height: 2.5rem;
-		@apply label w-full text-xl font-bold px-4 py-2 text-gray-900 z-[2] bg-base-300 drop-shadow-lg;
+		@reference label w-full text-xl font-bold px-4 py-2 text-gray-900 z-[2] bg-base-300 drop-shadow-lg;
 	}
 </style>
