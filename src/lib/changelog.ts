@@ -9,7 +9,7 @@ export const ChangeLog = {
 	'08-15-24': {
 		title: 'Added more DSG options to ratio calculator and fixed RPS calc bug.',
 		body: [
-			'9T and 10T options have been added to the ratio calculator for increased DSG compatability.',
+			'9T and 10T options have been added to the ratio calculator for increased DSG compatibility.',
 			'Doing such added a bug in the RPS calc which has now been fixed by breaking up data types.'
 		]
 	},
