@@ -38,32 +38,36 @@
 	$: motorSpeed.value = decimalizeString(motorSpeed.value);
 </script>
 
-<div class="calcCard">
+<div class="calcCard card w-80 bg-base-200 shadow-xl m-4 h-min">
 	<CalcHeader title="ROF Calculator" bind:open={infoOpen} />
 	{#if infoOpen}
-		<div class="calcInfoBox" transition:slide={{ delay: 10, duration: 150 }}>
+		<div
+			class="px-4 pb-2 py-1 bg-gray-300 drop-shadow-md"
+			transition:slide={{ delay: 10, duration: 150 }}
+		>
 			<p class="font-bold">
 				Data is approximate and is based 80-90% efficience of the motor to help stay inside any ROF
 				limits.
 			</p>
 		</div>
 	{/if}
-	<div class="calcBody">
+	<div class="card-body p-6 pt-3">
 		<form id="ROF-calculator-input">
 			<div class="join pb-1" style="display: flex;">
 				<span class="grow basis-0 p-0 justify-center">
 					<div class="afterContainer" style="width: 100%">
-						<label for="barrelLength" class="calcLabel">
+						<label for="barrelLength" class="label pt-2 font-bold pb-1">
 							<span class="label-text" style="width: 100%; text-align:center">Ratio</span>
 						</label>
-						{#if ratio.value}<span class="floatsAfter toOneAfter" style="top: 55%"
-								>{ratio.value}</span
+						{#if ratio.value}<span
+								class="floatsAfter input text-slate-400 toOneAfter"
+								style="top: 55%">{ratio.value}</span
 							>
 						{/if}
 						<input
-							class="calcBaseInputTextBox placeholder:text-slate-400"
+							class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400"
 							style="border-radius: 0.5rem 0rem 0rem 0.5rem;"
-							class:emptyInput={ratio.inValid && ratio.value === ''}
+							class:bg-red-100={ratio.inValid && ratio.value === ''}
 							id="barrelLength"
 							bind:value={ratio.value}
 							placeholder={'18:1'}
@@ -75,14 +79,14 @@
 					</div>
 				</span>
 				<span class="grow basis-0 p-0 justify-center">
-					<label for="gearType" class="calcLabel">
+					<label for="gearType" class="label pt-2 font-bold pb-1">
 						<span class="label-text" style="width: 100%; text-align:center">Gear Type</span>
 					</label>
 					<select
 						bind:value={selectedGearType}
 						id="gearType"
 						style="width: 100%;"
-						class="calcBaseDropdownSelector join-item"
+						class="select select-primary join-item focus:outline-none focus:outline-[3px] focus:outline-primary focus:outline-offset-[-3px] pl-3 pr-3 join-item"
 					>
 						{#each Object.entries(gearShotsPerCycle) as [title, data]}
 							<option value={data}>{title}</option>
@@ -91,17 +95,18 @@
 				</span>
 				<span class="grow basis-0 p-0 justify-center">
 					<div class="afterContainer" style="width: 100%">
-						<label for="barrelLength" class="calcLabel">
+						<label for="barrelLength" class="label pt-2 font-bold pb-1">
 							<span class="label-text" style="width: 100%; text-align:center">Motor RPM</span>
 						</label>
-						{#if motorSpeed.value}<span class="floatsAfter kAfter" style="top: 55%"
-								>{motorSpeed.value}</span
+						{#if motorSpeed.value}<span
+								class="floatsAfter input text-slate-400 kAfter"
+								style="top: 55%">{motorSpeed.value}</span
 							>
 						{/if}
 						<input
-							class="calcBaseInputTextBox placeholder:text-slate-400"
+							class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400"
 							style="border-radius: 0rem 0.5rem 0.5rem 0rem;"
-							class:emptyInput={motorSpeed.inValid && motorSpeed.value === ''}
+							class:bg-red-100={motorSpeed.inValid && motorSpeed.value === ''}
 							id="barrelLength"
 							bind:value={motorSpeed.value}
 							placeholder={'36k'}
@@ -114,13 +119,13 @@
 				</span>
 			</div>
 			<button
-				class="calcButton"
+				class="btn !btn-warning w-full mt-4 text-lg font-bold"
 				on:click={calculateROF}
-				class:validButton={Number(motorSpeed.value) > 0}
+				class:btn-secondary={Number(motorSpeed.value) > 0}
 				>Rate of Fire
 			</button>
 		</form>
-		<div class="calcOutput">
+		<div class="label min-h-[1.75rem] items-start p-0 justify-center text-lg font-bold select-text">
 			{output}
 		</div>
 	</div>
@@ -132,7 +137,6 @@
 		visibility: hidden;
 		position: absolute;
 		z-index: 2;
-		@apply input text-slate-400;
 	}
 	.kAfter::after {
 		content: 'k';

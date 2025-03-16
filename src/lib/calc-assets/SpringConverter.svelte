@@ -12,7 +12,13 @@
 	import { slide } from 'svelte/transition';
 	import CalcHeader from '$lib/calc-assets/CalcHeader.svelte';
 
-	const springTypes = {
+	interface springTypeIFace {
+		M: { bbWeight: string };
+		SP: { bbWeight: string };
+		'%': { bbWeight: string };
+	}
+
+	const springTypes: springTypeIFace = {
 		M: { bbWeight: '0.20' },
 		SP: { bbWeight: '0.25' },
 		'%': { bbWeight: '0.20' }
@@ -29,7 +35,7 @@
 		event.preventDefault();
 		conversion = '';
 		let tempSpring: number;
-		if (selectedSpringType === '%') {
+		if (selectedSpringType[0] === '%') {
 			tempSpring = mpsOut((springStrength / 100) * 0.81, 0.2);
 		} else {
 			tempSpring = springStrength;
@@ -47,7 +53,7 @@
 		let jouleOutput = bbEnergyNormalizedJouleOutput(
 			'MPS',
 			springRating,
-			Number(springTypes[selectedSpringType].bbWeight)
+			Number(selectedSpringType.valueOf())
 		);
 		conversion = `${fpsOut(jouleOutput, weight)} FPS, ${mpsOut(
 			jouleOutput,
@@ -58,20 +64,23 @@
 	$: bbWeight.value = decimalizeString(bbWeight.value);
 </script>
 
-<div class="calcCard">
+<div class="calcCard card w-80 bg-base-200 shadow-xl m-4 h-min">
 	<CalcHeader title="Spring to Energy" bind:open={infoOpen} />
 	{#if infoOpen}
-		<div class="calcInfoBox" transition:slide={{ delay: 10, duration: 150 }}>
+		<div
+			class="px-4 pb-2 py-1 bg-gray-300 drop-shadow-md"
+			transition:slide={{ delay: 10, duration: 150 }}
+		>
 			<p class="font-bold">Data is approximate and is based on manufacturer reported values.</p>
 			<p>BB weight max value: 3 (grams)</p>
 		</div>
 	{/if}
-	<div class="calcBody">
+	<div class="card-body p-6 pt-3">
 		<form id="energy-calculator-input">
 			<div class="join pb-1" style="display: flex;">
 				{#each Object.entries(springTypes) as [springType]}
 					<input
-						class="calcJoinButton btn btn-outline btn-primary"
+						class="join-item no-animation grow basis-0 p-0 justify-center text-lg font-bold !outline-none focus:btn-active btn btn-outline btn-primary"
 						type="radio"
 						name="energyType"
 						id={springType}
@@ -80,7 +89,10 @@
 						bind:group={selectedSpringType}
 					/>
 				{/each}
-				<select bind:value={springStrength} class="calcBaseDropdownSelector w-32">
+				<select
+					bind:value={springStrength}
+					class="select select-primary join-item focus:outline-none focus:outline-[3px] focus:outline-primary focus:outline-offset-[-3px] pl-3 pr-3 w-32"
+				>
 					{#each springList as spring}
 						<option value={spring}>{spring}</option>
 					{/each}
@@ -90,24 +102,24 @@
 				<span class="label-text">BB Weight</span>
 			</label>
 			<input
-				class="calcBaseInputTextBox"
-				class:emptyInput={bbWeight.inValid && bbWeight.value === ''}
+				class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors"
+				class:bg-red-100={bbWeight.inValid && bbWeight.value === ''}
 				id="energy-bbWeight"
 				bind:value={bbWeight.value}
-				placeholder={`${springTypes[selectedSpringType].bbWeight}`}
+				placeholder={`${springTypes[selectedSpringType as keyof springTypeIFace].bbWeight}`}
 				on:beforeinput={(event) => validateNumber(event, bbWeight.value, bbObject)}
 				inputmode="decimal"
 				autocomplete="off"
 			/>
 			<!--			<span class="input" />-->
 			<button
-				class="calcButton"
+				class="btn !btn-warning w-full mt-4 text-lg font-bold"
 				on:click={calculateEnergy}
-				class:validButton={Number(bbWeight.value) > 0}
+				class:btn-secondary={Number(bbWeight.value) > 0}
 				>Velocity
 			</button>
 		</form>
-		<div class="calcOutput">
+		<div class="label min-h-[1.75rem] items-start p-0 justify-center text-lg font-bold select-text">
 			{conversion}
 		</div>
 	</div>

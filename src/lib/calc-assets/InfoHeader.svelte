@@ -8,7 +8,10 @@
 	}
 </script>
 
-<button on:click={(event) => toggle(event)} class="calc-top">
+<button
+	on:click={(event) => toggle(event)}
+	class="calc-top label w-full text-xl font-bold px-4 py-2 text-gray-900 z-[2] bg-base-300 drop-shadow-lg"
+>
 	<span>{title}</span>
 	<svg
 		fill="currentColor"
@@ -28,6 +31,5 @@
 	.calc-top {
 		border-radius: 0.5rem;
 		height: 2.5rem;
-		@reference label w-full text-xl font-bold px-4 py-2 text-gray-900 z-[2] bg-base-300 drop-shadow-lg;
 	}
 </style>

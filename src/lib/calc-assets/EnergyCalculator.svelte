@@ -88,10 +88,13 @@
 	$: tempObject.compareWeight.value = decimalizeString(tempObject.compareWeight.value);
 </script>
 
-<div class="calcCard">
+<div class="calcCard card w-80 bg-base-200 shadow-xl m-4 h-min">
 	<CalcHeader title="Energy Converter" bind:open={infoOpen} />
 	{#if infoOpen}
-		<div class="calcInfoBox" transition:slide={{ delay: 10, duration: 150 }}>
+		<div
+			class="px-4 pb-2 py-1 bg-gray-300 drop-shadow-md"
+			transition:slide={{ delay: 10, duration: 150 }}
+		>
 			<p class="font-bold">Max values are:</p>
 			<ul class="list-disc pl-6">
 				<li>Joules: 6</li>
@@ -101,12 +104,12 @@
 			</ul>
 		</div>
 	{/if}
-	<div class="calcBody">
+	<div class="card-body p-6 pt-3">
 		<form id="energy-calculator-input">
 			<div class="join pb-1" style="display: flex;">
 				{#each Object.entries(energyTypes) as [energyType]}
 					<input
-						class="calcJoinButton btn btn-outline btn-primary"
+						class="join-item no-animation grow basis-0 p-0 justify-center text-lg font-bold !outline-none focus:btn-active btn btn-outline btn-primary"
 						type="radio"
 						name="energyType"
 						id={energyType}
@@ -121,8 +124,8 @@
 				{/each}
 			</div>
 			<input
-				class="calcBaseInputTextBox"
-				class:emptyInput={tempObject.inputEnergy.inValid &&
+				class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors"
+				class:bg-red-100={tempObject.inputEnergy.inValid &&
 					Number(tempObject.inputEnergy.value) === 0}
 				id="energy-inputEnergy"
 				bind:value={tempObject.inputEnergy.value}
@@ -136,8 +139,8 @@
 				<span class="label-text">BB Weight</span>
 			</label>
 			<input
-				class="calcBaseInputTextBox"
-				class:emptyInput={tempObject.bbWeight.inValid && Number(tempObject.bbWeight.value) === 0}
+				class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors"
+				class:bg-red-100={tempObject.bbWeight.inValid && Number(tempObject.bbWeight.value) === 0}
 				id="energy-bbWeight"
 				bind:value={tempObject.bbWeight.value}
 				placeholder={`0.25`}
@@ -149,7 +152,7 @@
 				<span class="label-text">Comparison BB Weight</span>
 			</label>
 			<input
-				class="calcBaseInputTextBox"
+				class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors"
 				id="energy-bbWeightCompare"
 				bind:value={tempObject.compareWeight.value}
 				placeholder={`0.25`}
@@ -159,14 +162,14 @@
 				autocomplete="off"
 			/>
 			<button
-				class="calcButton"
+				class="btn !btn-warning w-full mt-4 text-lg font-bold"
 				on:click={calculateEnergy}
-				class:validButton={Number(tempObject.inputEnergy.value) > 0 &&
+				class:btn-secondary={Number(tempObject.inputEnergy.value) > 0 &&
 					Number(tempObject.bbWeight.value) > 0}
 				>Energy
 			</button>
 		</form>
-		<div class="calcOutput">
+		<div class="label min-h-[1.75rem] items-start p-0 justify-center text-lg font-bold select-text">
 			{speedConversion}
 			<br />
 			{primaryOutput}

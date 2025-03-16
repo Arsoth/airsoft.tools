@@ -26,6 +26,10 @@
 	let selectedCylType = 'AEG' as keyof typeof cylTypes;
 	let selectedGearType: 16;
 
+	interface cylTypeIface {
+		'Select...': {};
+	}
+
 	let cylValue = {
 		value: 'Select...' as keyof typeof aegCyls,
 		inValid: false
@@ -144,15 +148,21 @@
 		return result;
 	}
 	// @ts-ignore
-	$: cylData = selectedCylType === 'AEG' ? aegCyls[cylValue.value] : boltCyls[cylValue.value];
+	$: cylData =
+		selectedCylType === 'AEG'
+			? aegCyls[cylValue.value]
+			: boltCyls[cylValue.value as keyof cylTypeIface];
 	$: aoeFixed === true ? (toothToCylDistance.value = 10.5) : (toothToCylDistance.value = 6);
 	$: bbWeight.value = decimalizeString(bbWeight.value);
 </script>
 
-<div class="calcCard">
+<div class="calcCard card w-80 bg-base-200 shadow-xl m-4 h-min">
 	<CalcHeader title="Cylinder Ratio" bind:open={infoOpen} />
 	{#if infoOpen}
-		<div class="calcInfoBox" transition:slide={{ delay: 10, duration: 150 }}>
+		<div
+			class="px-4 pb-2 py-1 bg-gray-300 drop-shadow-md"
+			transition:slide={{ delay: 10, duration: 150 }}
+		>
 			<p class="mb-2">
 				<b>Advanced</b> allows for shortstroking and Airbreaks as well as custom AOE, cylinder sizes,
 				and porting.
@@ -163,12 +173,12 @@
 			</p>
 		</div>
 	{/if}
-	<div class="calcBody">
+	<div class="card-body p-6 pt-3">
 		<form id="energy-calculator-input">
 			<div class="join pb-1" style="display: flex;">
 				{#each gunType as type}
 					<input
-						class="calcJoinButton btn btn-outline btn-primary"
+						class="join-item no-animation grow basis-0 p-0 justify-center text-lg font-bold !outline-none focus:btn-active btn btn-outline btn-primary"
 						type="radio"
 						name="gunType"
 						id={type}
@@ -183,8 +193,8 @@
 				{/each}
 				<select
 					bind:value={cylValue.value}
-					class="calcBaseDropdownSelector w-[8.5rem]"
-					class:emptyInput={cylValue.inValid && cylValue.value === 'Select...'}
+					class="select select-primary join-item focus:outline-none focus:outline-[3px] focus:outline-primary focus:outline-offset-[-3px] pl-3 pr-3 w-[8.5rem]"
+					class:bg-red-100={cylValue.inValid && cylValue.value === 'Select...'}
 				>
 					{#each Object.entries(cylTypes[selectedCylType]) as [name, data]}
 						<option disabled={data.length === 0} value={name}>{`${name}`}</option>
@@ -194,13 +204,13 @@
 			{#if selectedCylType === 'AEG'}
 				<div class="join pb-1" style="display: flex;">
 					<div>
-						<label for="gearType" class="calcLabel">
+						<label for="gearType" class="label pt-2 font-bold pb-1">
 							<span class="label-text" style="width: 100%; text-align:center">Gear Type</span>
 						</label>
 						<select
 							bind:value={selectedGearType}
 							id="gearType"
-							class="calcBaseDropdownSelector w-[7rem] join-item"
+							class="select select-primary join-item focus:outline-none focus:outline-[3px] focus:outline-primary focus:outline-offset-[-3px] pl-3 pr-3 w-[7rem] join-item"
 							style="border-radius: 0.5rem 0rem 0rem 0.5rem;"
 						>
 							{#each Object.entries(gearTeeth) as [title, data]}
@@ -209,7 +219,7 @@
 						</select>
 					</div>
 					<span class="grow basis-0 p-0 justify-center">
-						<label for="aoeFixed" class="calcLabel">
+						<label for="aoeFixed" class="label pt-2 font-bold pb-1">
 							<span class="label-text" style="width: 100%; text-align:center">AOE Fixed</span>
 						</label>
 						<input
@@ -253,7 +263,7 @@
 						</label>
 					</span>
 					<span class="grow basis-0 p-0 justify-center">
-						<label for="advanced" class="calcLabel">
+						<label for="advanced" class="label pt-2 font-bold pb-1">
 							<span class="label-text" style="width: 100%; text-align:center">Advanced</span>
 						</label>
 						<input
@@ -304,15 +314,16 @@
 				</div>
 				{#if advancedMode}
 					<div class="afterContainer" style="width: 49%; float:left">
-						<label for="shortStrokeBy" class="calcLabel">
+						<label for="shortStrokeBy" class="label pt-2 font-bold pb-1">
 							<span class="label-text" style="width: 100%; text-align:center">Shortstroke by</span>
 						</label>
-						{#if shortStrokeBy.value}<span class="floatsAfter teethAfter" style="top: 55%"
-								>{shortStrokeBy.value}</span
+						{#if shortStrokeBy.value}<span
+								class="floatsAfter input text-slate-400 teethAfter"
+								style="top: 55%">{shortStrokeBy.value}</span
 							>
 						{/if}
 						<input
-							class="calcBaseInputTextBox placeholder:text-slate-400 join-item"
+							class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400 join-item"
 							id="shortStrokeBy"
 							placeholder={`0 Teeth`}
 							bind:value={shortStrokeBy.value}
@@ -324,15 +335,16 @@
 					</div>
 
 					<div class="afterContainer mb-2" style="width: 49%; float:right">
-						<label class="calcLabel" for="airbrake">
+						<label class="label pt-2 font-bold pb-1" for="airbrake">
 							<span class="label-text" style="width: 100%; text-align:center">Airbreak Length</span>
 						</label>
-						{#if airBrake.value}<span class="floatsAfter mmAfter" style="top: 55%"
-								>{airBrake.value}</span
+						{#if airBrake.value}<span
+								class="floatsAfter input text-slate-400 mmAfter"
+								style="top: 55%">{airBrake.value}</span
 							>
 						{/if}
 						<input
-							class="calcBaseInputTextBox placeholder:text-slate-400"
+							class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400"
 							id="airBrake"
 							placeholder={`0mm`}
 							bind:value={airBrake.value}
@@ -344,20 +356,24 @@
 					</div>
 					<InfoHeader title="Configure All Fields" bind:open={moreAdvanced} />
 					{#if moreAdvanced}
-						<div class="calcMoreOptionsBox" transition:slide={{ delay: 10, duration: 150 }}>
+						<div
+							class="calcMoreOptionsBox px-4 pb-2 py-1 bg-gray-300 drop-shadow-md"
+							transition:slide={{ delay: 10, duration: 150 }}
+						>
 							<div style="display:inline-block">
 								<div class="afterContainer" style="width: 49%; float:left">
-									<label for="toothToCylDistance" class="calcLabel">
+									<label for="toothToCylDistance" class="label pt-2 font-bold pb-1">
 										<span class="label-text text-xs" style="width: 100%; text-align:center"
 											>Pickup to Cyl</span
 										>
 									</label>
-									{#if toothToCylDistance.value}<span class="floatsAfter mmAfter" style="top: 52%"
-											>{toothToCylDistance.value}</span
+									{#if toothToCylDistance.value}<span
+											class="floatsAfter input text-slate-400 mmAfter"
+											style="top: 52%">{toothToCylDistance.value}</span
 										>
 									{/if}
 									<input
-										class="calcBaseInputTextBox placeholder:text-slate-400 join-item"
+										class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400 join-item"
 										id="toothToCylDistance"
 										placeholder={`0mm`}
 										bind:value={toothToCylDistance.value}
@@ -372,18 +388,18 @@
 									/>
 								</div>
 								<div class="afterContainer" style="width: 49%; float:right">
-									<label for="pistonHeadSpacer" class="calcLabel">
+									<label for="pistonHeadSpacer" class="label pt-2 font-bold pb-1">
 										<span class="label-text text-xs" style="width: 100%; text-align:center"
 											>Piston Spacers</span
 										>
 									</label>
 									{#if pistonSpacerThickness.value}<span
-											class="floatsAfter mmAfter"
+											class="floatsAfter input text-slate-400 mmAfter"
 											style="top: 52%">{pistonSpacerThickness.value}</span
 										>
 									{/if}
 									<input
-										class="calcBaseInputTextBox placeholder:text-slate-400 join-item"
+										class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400 join-item"
 										id="pistonHeadSpacer"
 										placeholder={`0mm`}
 										bind:value={pistonSpacerThickness.value}
@@ -398,17 +414,18 @@
 									/>
 								</div>
 								<div class="afterContainer" style="width: 49%; float:right">
-									<label for="shortStrokeBy" class="calcLabel">
+									<label for="shortStrokeBy" class="label pt-2 font-bold pb-1">
 										<span class="label-text text-xs" style="width: 100%; text-align:center"
 											>Cyl front to Ports</span
 										>
 									</label>
-									{#if cylData.length}<span class="floatsAfter mmAfter" style="top: 52%"
-											>{cylData.length}</span
+									{#if cylData.length}<span
+											class="floatsAfter input text-slate-400 mmAfter"
+											style="top: 52%">{cylData.length}</span
 										>
 									{/if}
 									<input
-										class="calcBaseInputTextBox placeholder:text-slate-400 join-item"
+										class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400 join-item"
 										id="shortStrokeBy"
 										placeholder={`0mm`}
 										bind:value={cylData.length}
@@ -420,17 +437,18 @@
 								</div>
 
 								<div class="afterContainer" style="width: 49%; float:left">
-									<label class="calcLabel" for="airbrake">
+									<label class="label pt-2 font-bold pb-1" for="airbrake">
 										<span class="label-text text-xs" style="width: 100%; text-align:center"
 											>Cyl ID</span
 										>
 									</label>
-									{#if cylData.diameter}<span class="floatsAfter mmAfter" style="top: 52%"
-											>{cylData.diameter}</span
+									{#if cylData.diameter}<span
+											class="floatsAfter input text-slate-400 mmAfter"
+											style="top: 52%">{cylData.diameter}</span
 										>
 									{/if}
 									<input
-										class="calcBaseInputTextBox placeholder:text-slate-400"
+										class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400"
 										id="airBrake"
 										placeholder={`0mm`}
 										bind:value={cylData.diameter}
@@ -445,20 +463,20 @@
 				{/if}
 			{:else}
 				<div class="afterContainer">
-					<label class="calcLabel" for="airbrake">
+					<label class="label pt-2 font-bold pb-1" for="airbrake">
 						<span class="label-text">Airbreak Length</span>
 					</label>
-					{#if airBrake.value}<span class="floatsAfter mmAfter" style="top: 55%"
-							>{airBrake.value}</span
+					{#if airBrake.value}<span
+							class="floatsAfter input text-slate-400 mmAfter"
+							style="top: 55%">{airBrake.value}</span
 						>
 					{/if}
 					<input
-						class="calcBaseInputTextBox placeholder:text-slate-400"
+						class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400"
 						id="airBrake"
 						placeholder={`0mm`}
 						bind:value={airBrake.value}
-						on:beforeinput={(event) =>
-							validateNumber(event, airBrake.value.toString(), volumeReductionObject)}
+						on:beforeinput={(event) => validateNumber(event, airBrake.value, volumeReductionObject)}
 						inputmode="decimal"
 						autocomplete="off"
 					/>
@@ -467,17 +485,18 @@
 			<div class="join pb-1" style="display: flex;">
 				<span style="width: 100%;">
 					<div class="afterContainer" style="width: 100%">
-						<label for="barrelLength" class="calcLabel">
+						<label for="barrelLength" class="label pt-2 font-bold pb-1">
 							<span class="label-text" style="width: 100%; text-align:center">Barrel length</span>
 						</label>
-						{#if barrelLength.value}<span class="floatsAfter mmAfter" style="top: 55%"
-								>{barrelLength.value}</span
+						{#if barrelLength.value}<span
+								class="floatsAfter input text-slate-400 mmAfter"
+								style="top: 55%">{barrelLength.value}</span
 							>
 						{/if}
 						<input
-							class="calcBaseInputTextBox placeholder:text-slate-400"
+							class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors placeholder:text-slate-400"
 							style="border-radius: 0.5rem 0rem 0rem 0.5rem;"
-							class:emptyInput={barrelLength.inValid && barrelLength.value === ''}
+							class:bg-red-100={barrelLength.inValid && barrelLength.value === ''}
 							id="barrelLength"
 							bind:value={barrelLength.value}
 							placeholder={'363mm'}
@@ -497,13 +516,13 @@
 					</div>
 				</span>
 				<span>
-					<label for="barrelDiameter" class="calcLabel">
+					<label for="barrelDiameter" class="label pt-2 font-bold pb-1">
 						<span class="label-text" style="width: 100%; text-align:center">Barrel Diameter</span>
 					</label>
 					<select
 						bind:value={barrelDiameter}
 						id="barrelDiameter"
-						class="calcBaseDropdownSelector w-[8rem]"
+						class="select select-primary join-item focus:outline-none focus:outline-[3px] focus:outline-primary focus:outline-offset-[-3px] pl-3 pr-3 w-[8rem]"
 					>
 						{#each barrelDiameters as diameter}
 							<option value={diameter}>{`${padZeros(diameter)}mm`}</option>
@@ -511,12 +530,12 @@
 					</select>
 				</span>
 			</div>
-			<label class="calcLabel" for="energy-bbWeight">
+			<label class="label pt-2 font-bold pb-1" for="energy-bbWeight">
 				<span class="label-text">BB Weight</span>
 			</label>
 			<input
-				class="calcBaseInputTextBox"
-				class:emptyInput={bbWeight.inValid && bbWeight.value === ''}
+				class="input input-bordered w-full focus:ring-2 focus:ring-inset ring-slate-300 !outline-none transition-colors"
+				class:bg-red-100={bbWeight.inValid && bbWeight.value === ''}
 				id="energy-bbWeight"
 				bind:value={bbWeight.value}
 				placeholder={`0.25`}
@@ -526,14 +545,14 @@
 				autocomplete="off"
 			/>
 			<button
-				class="calcButton"
+				class="btn !btn-warning w-full mt-4 text-lg font-bold"
 				on:click={calculateRatio}
-				class:validButton={(Number(barrelLength.value) > 0 || Number(bbWeight.value) > 0) &&
+				class:btn-secondary={(Number(barrelLength.value) > 0 || Number(bbWeight.value) > 0) &&
 					Number(cylData.length) > 0}
 				>Ratio
 			</button>
 		</form>
-		<div class="calcOutput">
+		<div class="label min-h-[1.75rem] items-start p-0 justify-center text-lg font-bold select-text">
 			{currentRatioString}
 			{#if currentRatioString}<br />{/if}
 			{bestRatioString}
@@ -544,19 +563,14 @@
 </div>
 
 <style lang="postcss">
-	@import './calc.css';
-	.calcButton {
-		@apply btn !btn-warning w-full mt-4 text-lg font-bold;
-	}
-
-	.validButton {
-		@apply !btn-secondary;
+	@reference './calc.css';
+	.calcMoreOptionsBox {
+		border-radius: 0rem 0rem 0.5rem 0.5rem;
 	}
 	.floatsAfter {
 		visibility: hidden;
 		position: absolute;
 		z-index: 2;
-		@apply input text-slate-400;
 	}
 	.mmAfter::after {
 		content: 'mm';

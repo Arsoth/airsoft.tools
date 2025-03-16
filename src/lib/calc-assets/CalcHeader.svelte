@@ -9,7 +9,7 @@
 	use:clickoutside
 	on:clickoutside={() => (open = false)}
 	on:click={() => (open = !open)}
-	class="calc-top"
+	class="calc-top label w-full text-xl font-bold px-4 py-2 text-gray-900 z-[2] bg-base-300 drop-shadow-lg"
 >
 	<span>{title}</span>
 	<svg
@@ -30,6 +30,5 @@
 	.calc-top {
 		border-radius: 0.5rem 0.5rem 0 0;
 		height: 2.5rem;
-		@apply label w-full text-xl font-bold px-4 py-2 text-gray-900 z-[2] bg-base-300 drop-shadow-lg;
 	}
 </style>
