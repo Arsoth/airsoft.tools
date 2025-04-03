@@ -119,9 +119,9 @@
 				</span>
 			</div>
 			<button
-				class="btn !btn-warning w-full mt-4 text-lg font-bold"
+				class="btn btn-warning w-full mt-4 text-lg font-bold"
 				on:click={calculateROF}
-				class:btn-secondary={Number(motorSpeed.value) > 0}
+				class:!btn-secondary={Number(motorSpeed.value) > 0}
 				>Rate of Fire
 			</button>
 		</form>

@@ -53,7 +53,7 @@
 		let jouleOutput = bbEnergyNormalizedJouleOutput(
 			'MPS',
 			springRating,
-			Number(selectedSpringType.valueOf())
+			Number(springTypes[selectedSpringType as keyof springTypeIFace].bbWeight)
 		);
 		conversion = `${fpsOut(jouleOutput, weight)} FPS, ${mpsOut(
 			jouleOutput,
@@ -62,6 +62,7 @@
 	}
 
 	$: bbWeight.value = decimalizeString(bbWeight.value);
+	$: console.log(Number(bbWeight.value));
 </script>
 
 <div class="calcCard card w-80 bg-base-200 shadow-xl m-4 h-min">
@@ -113,9 +114,9 @@
 			/>
 			<!--			<span class="input" />-->
 			<button
-				class="btn !btn-warning w-full mt-4 text-lg font-bold"
+				class="btn btn-warning w-full mt-4 text-lg font-bold"
 				on:click={calculateEnergy}
-				class:btn-secondary={Number(bbWeight.value) > 0}
+				class:!btn-secondary={Number(bbWeight.value) > 0}
 				>Velocity
 			</button>
 		</form>

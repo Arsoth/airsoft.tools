@@ -545,9 +545,9 @@
 				autocomplete="off"
 			/>
 			<button
-				class="btn !btn-warning w-full mt-4 text-lg font-bold"
+				class="btn btn-warning w-full mt-4 text-lg font-bold"
 				on:click={calculateRatio}
-				class:btn-secondary={(Number(barrelLength.value) > 0 || Number(bbWeight.value) > 0) &&
+				class:!btn-secondary={(Number(barrelLength.value) > 0 || Number(bbWeight.value) > 0) &&
 					Number(cylData.length) > 0}
 				>Ratio
 			</button>

@@ -162,9 +162,9 @@
 				autocomplete="off"
 			/>
 			<button
-				class="btn !btn-warning w-full mt-4 text-lg font-bold"
+				class="btn btn-warning w-full mt-4 text-lg font-bold"
 				on:click={calculateEnergy}
-				class:btn-secondary={Number(tempObject.inputEnergy.value) > 0 &&
+				class:!btn-secondary={Number(tempObject.inputEnergy.value) > 0 &&
 					Number(tempObject.bbWeight.value) > 0}
 				>Energy
 			</button>
