@@ -17,14 +17,14 @@ export const boltCyls = {
 };
 export const aegCyls = {
 	'Select...': { diameter: '', length: '' },
-	'Type A, Full, 0': { diameter: 23.75, length: 72.25 },
-	'Type B': { diameter: 23.75, length: 64.75 },
-	'Type C, 4/5, I': { diameter: 23.75, length: 53.5 },
-	'Type D, 3/4, II': { diameter: 23.75, length: 48.9 },
-	'Type E, 2/3': { diameter: 23.75, length: 46.5 },
-	'Type F, 1/2, III': { diameter: 23.75, length: 35.25 },
-	'V2.5': { diameter: 23.75, length: 82 },
-	'Bore Up': { diameter: 24.65, length: 72.25 }
+	'Type A, Full, 0': { diameter: 23.8, length: 72.25 },
+	'Type B': { diameter: 23.8, length: 64.75 },
+	'Type C, 4/5, I': { diameter: 23.8, length: 53.5 },
+	'Type D, 3/4, II': { diameter: 23.8, length: 48.9 },
+	'Type E, 2/3': { diameter: 23.8, length: 46.5 },
+	'Type F, 1/2, III': { diameter: 23.8, length: 35.25 },
+	'V2.5': { diameter: 23.8, length: 82 },
+	'Bore Up': { diameter: 24.7, length: 72.25 }
 	// 'RA D': {'diameter': 23.75, 'length': 0},
 	// 'RA C': {'diameter': 23.75, 'length': 0},
 	// 'RA B': {'diameter': 23.75, 'length': 0},
