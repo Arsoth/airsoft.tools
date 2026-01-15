@@ -1,9 +1,17 @@
 export const ChangeLog = {
+	'01-15-2
+		65': {
+		title: 'Updated ID of cylinders',
+		body: [
+			'Regular and bore up cylinders both recieved +0.05mm to their bore size to match official spec.',
+			'This brings normal types from 23.75 -> 23.8mm ID, and bore up from 24.65 -> 24.7mm. Very minor change.'
+		]
+	},
 	'02-25-25': {
 		title: 'Moved project into personal repo on GitHub.',
 		body: [
 			'Moved from The-Foundation-Group to Arsoth.',
-			"This shouldn't change anything functionality wise, just affects where the bug report button leads."
+			'This shouldn\'t change anything functionality wise, just affects where the bug report button leads.'
 		]
 	},
 	'08-15-24': {
