@@ -1,6 +1,5 @@
 export const ChangeLog = {
-	'01-15-26':
-		65': {
+	'01-15-26': {
 		title: 'Updated ID of cylinders',
 		body: [
 			'Regular and bore up cylinders both recieved +0.05mm to their bore size to match official spec.',
