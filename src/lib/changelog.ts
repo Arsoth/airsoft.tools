@@ -1,5 +1,5 @@
 export const ChangeLog = {
-	'01-15-26'
+	'01-15-26':
 		65': {
 		title: 'Updated ID of cylinders',
 		body: [
